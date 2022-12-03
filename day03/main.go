@@ -10,7 +10,7 @@ import (
 //go:embed input.txt
 var input string
 
-func calcScore(item byte) int {
+func calcScore(item rune) int {
 	if item > 96 {
 		return int(item) - 96
 	}
@@ -24,15 +24,15 @@ func getErrorSum() int {
 
 	for s.Scan() {
 		items := s.Text()
+		m := make(map[rune]bool)
 
-		m := make(map[byte]bool)
-		for i := 0; i < len(items)/2; i++ {
-			m[items[i]] = true
+		for _, item := range items[:len(items)/2] {
+			m[item] = true
 		}
 
-		for i := len(items) / 2; i < len(items); i++ {
-			if m[items[i]] {
-				sum += calcScore(items[i])
+		for _, item := range items[len(items)/2:] {
+			if m[item] {
+				sum += calcScore(item)
 				break
 			}
 		}
@@ -46,12 +46,12 @@ func getBadgeSum() int {
 	sum := 0
 
 	for i := 0; i < len(bags)-3; i = i + 3 {
-		m := make(map[byte]int)
+		m := make(map[rune]int)
+
 		for j := 0; j < 3; j++ {
 			items := bags[i+j]
 
-			for k := 0; k < len(items); k++ {
-				item := items[k]
+			for _, item := range items {
 				if m[item] == j {
 					m[item]++
 				}

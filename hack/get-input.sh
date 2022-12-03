@@ -18,4 +18,3 @@ curl -sSLf \
     -b "session=$COOKIE" \
     -o "$DAY_DIR/input.txt" \
     "https://adventofcode.com/2022/day/$DAY/input"
- 
