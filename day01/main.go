@@ -64,6 +64,6 @@ func getSumTopKCalories(k int) int {
 }
 
 func main() {
-	fmt.Println("Answer for Part 1", getTopCalories())
+	fmt.Println("Answer for Part 1:", getTopCalories())
 	fmt.Println("Answer for Part 2:", getSumTopKCalories(3))
 }
