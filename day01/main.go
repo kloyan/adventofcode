@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	_ "embed"
 	"fmt"
 	"sort"
@@ -14,14 +13,12 @@ import (
 var input string
 
 func getTopCalories() int {
-	s := bufio.NewScanner(strings.NewReader(input))
 	largest := 0
 	current := 0
 
-	for s.Scan() {
-		t := s.Text()
-		if t != "" {
-			current += common.ToInt(t)
+	for _, line := range strings.Split(input, "\n") {
+		if line != "" {
+			current += common.ToInt(line)
 			continue
 		}
 
@@ -36,14 +33,12 @@ func getTopCalories() int {
 }
 
 func getSumTopKCalories(k int) int {
-	s := bufio.NewScanner(strings.NewReader(input))
 	topk := make([]int, k)
 	current := 0
 
-	for s.Scan() {
-		t := s.Text()
-		if t != "" {
-			current += common.ToInt(t)
+	for _, line := range strings.Split(input, "\n") {
+		if line != "" {
+			current += common.ToInt(line)
 			continue
 		}
 

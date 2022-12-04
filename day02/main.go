@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	_ "embed"
 	"fmt"
 	"strings"
@@ -35,13 +34,11 @@ var loses = map[string]string{
 }
 
 func part1() int {
-	s := bufio.NewScanner(strings.NewReader(input))
 	total := 0
 
-	for s.Scan() {
-		t := s.Text()
-		them := string(t[0])
-		me := string(t[2])
+	for _, line := range strings.Split(strings.TrimSpace(input), "\n") {
+		var them, me string
+		fmt.Sscanf(line, "%s %s", &them, &me)
 
 		if wins[them] == me {
 			total += scores[me] + 0
@@ -56,13 +53,11 @@ func part1() int {
 }
 
 func part2() int {
-	s := bufio.NewScanner(strings.NewReader(input))
 	total := 0
 
-	for s.Scan() {
-		t := s.Text()
-		them := string(t[0])
-		outcome := string(t[2])
+	for _, line := range strings.Split(strings.TrimSpace(input), "\n") {
+		var them, outcome string
+		fmt.Sscanf(line, "%s %s", &them, &outcome)
 
 		if outcome == "X" {
 			me := wins[them]

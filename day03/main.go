@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	_ "embed"
 	"fmt"
 	"strings"
@@ -19,11 +18,9 @@ func calcScore(item rune) int {
 }
 
 func getErrorSum() int {
-	s := bufio.NewScanner(strings.NewReader(input))
 	sum := 0
 
-	for s.Scan() {
-		items := s.Text()
+	for _, items := range strings.Fields(input) {
 		m := make(map[rune]bool)
 
 		for _, item := range items[:len(items)/2] {
@@ -42,10 +39,10 @@ func getErrorSum() int {
 }
 
 func getBadgeSum() int {
-	bags := strings.Split(input, "\n")
+	bags := strings.Fields(input)
 	sum := 0
 
-	for i := 0; i < len(bags)-3; i = i + 3 {
+	for i := 0; i < len(bags)-1; i = i + 3 {
 		m := make(map[rune]int)
 
 		for j := 0; j < 3; j++ {
