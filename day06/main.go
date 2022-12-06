@@ -14,10 +14,10 @@ func main() {
 }
 
 func findMarker(input string, size int) int {
-	for i := size - 1; i < len(input); i++ {
-		str := input[i-size+1 : i+1]
+	for i := size; i < len(input); i++ {
+		str := input[i-size : i]
 		if isUnique(str) {
-			return i + 1
+			return i
 		}
 	}
 
@@ -27,12 +27,12 @@ func findMarker(input string, size int) int {
 func isUnique(str string) bool {
 	mask := 0
 	for i := range str {
-		bit := str[i] - byte('a')
-		if (mask & (1 << bit)) > 0 {
+		bit := 1 << (str[i] - byte('a'))
+		if (mask & bit) > 0 {
 			return false
 		}
 
-		mask |= (1 << bit)
+		mask |= bit
 	}
 
 	return true
