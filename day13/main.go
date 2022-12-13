@@ -44,11 +44,9 @@ func getDecoderKey(packets []any) int {
 		return compare(packets[i], packets[j]) < 0
 	})
 
-	res := 0
+	res := 1
 	for i, p := range packets {
-		if compare(p, div1) == 0 {
-			res += i + 1
-		} else if compare(p, div2) == 0 {
+		if compare(p, div1) == 0 || compare(p, div2) == 0 {
 			res *= i + 1
 		}
 	}
