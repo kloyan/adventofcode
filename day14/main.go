@@ -10,7 +10,7 @@ import (
 
 //go:embed input.txt
 var input string
-var source = Point{500, 0}
+var src = Point{500, 0}
 
 type Point struct {
 	x, y int
@@ -23,7 +23,7 @@ func (p Point) Add(x, y int) Point {
 func main() {
 	cave, height := parseCave(input)
 	fmt.Println("Answer for Part 1:", reachVoid(copyCave(cave), height))
-	fmt.Println("Answer for Part 1:", blockSource(cave, height+2))
+	fmt.Println("Answer for Part 2:", blockSource(cave, height+2))
 }
 
 func reachVoid(cave map[Point]bool, height int) int {
@@ -32,13 +32,13 @@ func reachVoid(cave map[Point]bool, height int) int {
 	for {
 		// Increment the height by one to create an artifical floor
 		// Reaching it counts as reaching the void
-		q := flow(cave, source, height+1)
+		q := flow(cave, src, height+1)
 		if q.y == height {
 			return sand
 		}
 
-		cave[q] = true
 		sand++
+		cave[q] = true
 	}
 }
 
@@ -46,14 +46,13 @@ func blockSource(cave map[Point]bool, height int) int {
 	sand := 0
 
 	for {
-		q := flow(cave, source, height)
-		if q == source {
-			// Include the sand that blocks the source
+		q := flow(cave, src, height)
+		if q == src {
 			return sand + 1
 		}
 
-		cave[q] = true
 		sand++
+		cave[q] = true
 	}
 }
 
